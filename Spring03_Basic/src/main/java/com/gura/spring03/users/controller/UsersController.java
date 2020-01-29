@@ -64,7 +64,7 @@ public class UsersController {
 		return mView;
 	}
 	/*
-	 * @ModelAttribute 어노테이션과 함께 Dto를 메소드의 인자로 선언하면
+	 * @ModelAttribute(파라미터 여러개 한번에 추출) 어노테이션과 함께 Dto를 메소드의 인자로 선언하면
 	 * 전송되는 파라미터가 자동 추출되어서 Dto 객체에 담겨서 인자로 전달된다.
 	 * 단, 전송되는 파라미터명과 Dto의 필드명이 같아야한다.
 	 */	
@@ -84,5 +84,21 @@ public class UsersController {
 		mView.setViewName("users/login");
 		//리턴 해 준다.
 		return mView;
+	}
+	
+	//로그아웃 요청 처리하는 메소드
+	@RequestMapping("/users/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		/*
+		 * forward 이동이 아닌 리다이렉트 이동 응답을 하려면
+		 * view page의 정보를
+		 * 
+		 * "redirect: 리다이렉트 시킬 절대 경로"
+		 * 
+		 * 형식으로 작성하면 된다.
+		 * 단, context path는 작성하지 않는다.
+		 */
+		return "redirect:/home.do";
 	}
 }
