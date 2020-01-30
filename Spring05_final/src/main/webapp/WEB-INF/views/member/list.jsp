@@ -16,6 +16,7 @@
 				<th>번호</th>
 				<th>이름</th>
 				<th>주소</th>
+				<th>삭제</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -23,7 +24,8 @@
 			<tr>
 				<td>${tmp.num }</td>
 				<td>${tmp.name }</td>
-				<th>${tmp.addr }</th>
+				<td>${tmp.addr }</td>
+				<td><a href="delete.do?num=${tmp.num }">삭제</a></td>
 			</tr>
 		</c:forEach>
 		</tbody>

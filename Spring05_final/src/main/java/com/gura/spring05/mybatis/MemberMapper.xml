@@ -7,4 +7,9 @@
 		from member
 		order by num asc
 	</select>
+	<!-- parameterType에는 하나의 type만 담을 수 있어서 여러개를 담으려면 dto에 담아서 전달한다. -->
+	<delete id="delete" parameterType="int">
+		delete from member
+		where num=#{num} <!-- # : ? -> setint -->
+	</delete>
 </mapper>
