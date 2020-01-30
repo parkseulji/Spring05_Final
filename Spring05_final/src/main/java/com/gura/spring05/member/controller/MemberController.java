@@ -23,7 +23,7 @@ public class MemberController {
 		List<MemberDto> list=dao.getList();
 		
 		mView.addObject("list", list);		
-		mView.setViewName("member/list");
+		mView.setViewName("member/list"); //forward이동-> /WEB_INF/views/member/list.jsp
 		return mView;
 	}
 }

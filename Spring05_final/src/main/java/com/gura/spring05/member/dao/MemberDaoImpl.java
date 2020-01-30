@@ -19,7 +19,7 @@ public class MemberDaoImpl implements MemberDao{
 	
 	@Override
 	public List<MemberDto> getList() { //row가 여러개면 selectList, 한개면 selectOne
-		List<MemberDto> list=session.selectList("member, getList");
+		List<MemberDto> list=session.selectList("member.getList");
 		return list;
 	}
 
