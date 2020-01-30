@@ -44,4 +44,15 @@ public class MessengerAspect {
 		//aop가 적용 된 메소드 리턴 직후
 		System.out.println("-- 수행직후 --");
 	}
+	
+	@Around("execution(String getMessage())")
+	public Object around2(ProceedingJoinPoint joinPoint) throws Throwable {
+		//aop가 적용된 메소드를 수행하고 리턴되는 값을 얻어낸다.
+		Object obj=joinPoint.proceed();
+		//리턴 할 값을 조작하기
+		obj="뭔 공부야 그냥 놀자!";
+		//리턴되는 값을 다시 리턴 해 주기
+		return obj;
+		
+	}
 }
