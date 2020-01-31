@@ -47,7 +47,7 @@
 		sessionFactory.setDonfigLocation("classpath:com/gura/spring05/mybatis/Configuration.xml")
 	 -->
 	
-	<beans:bean class="org.mybatis.spring.SqlSessionTemplate">
+	<beans:bean class="org.mybatis.spring.SqlSessionTemplate"><!-- SqlSessionTemplate:SqlSession을 구현(Dao가 의존하는 객체) -->
 		<beans:constructor-arg name="sqlSessionFactory" 
 			ref="sessionFactory"/>
 	</beans:bean>

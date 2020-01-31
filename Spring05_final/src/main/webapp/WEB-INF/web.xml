@@ -15,19 +15,19 @@
 	</listener>
 
 	<!-- Processes application requests -->
-	<servlet>
+	<servlet><!-- 서블릿 정의 (DispatcherServlet(controller분배))-->
 		<servlet-name>appServlet</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value>/WEB-INF/spring/appServlet/servlet-context.xml</param-value>
-		</init-param>
+		</init-param><!-- 서블릿의 세부적인 동작을 servlet-context.xml에 설정하면 서블릿이 읽어와서 동작을 한다. -->
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 		
-	<servlet-mapping>
+	<servlet-mapping><!-- 서블릿 맵핑 (직접 만든 서블릿이 아니기 때문에 xml에서 맵핑을 해 주어야 한다.) -->
 		<servlet-name>appServlet</servlet-name>
-		<url-pattern>*.do</url-pattern>
+		<url-pattern>*.do</url-pattern><!-- = @WebServlet("*.do") -->
 	</servlet-mapping>
 	
 	<!-- 최상위 경로 요청이 왔을때 home.do 요청이 자동으로 되도록 설정 -->

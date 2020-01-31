@@ -20,7 +20,7 @@
 			</tr>
 		</thead>
 		<tbody>
-		<c:forEach var="tmp" items="${requestScope.list }">
+		<c:forEach var="tmp" items="${requestScope.list }"><!-- list:key값 -->
 			<tr>
 				<td>${tmp.num }</td>
 				<td>${tmp.name }</td>

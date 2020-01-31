@@ -23,7 +23,7 @@ public class MemberController {
 		//회원목록을 얻어오려면?
 		List<MemberDto> list=dao.getList();
 		
-		mView.addObject("list", list);		
+		mView.addObject("list", list); //("key값", type)	
 		mView.setViewName("member/list"); //forward이동-> /WEB_INF/views/member/list.jsp
 		return mView;
 	}
@@ -32,7 +32,7 @@ public class MemberController {
 	public String delete(@RequestParam int num) {
 		//MemberDao 객체를 이용해서 회원정보 삭제
 		dao.delete(num);
-		//리다이렉트 응답		
+		//리다이렉트 응답(자동으로 재요청)
 		return "redirect:/member/list.do";
 	}
 }
