@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="family">
+	<select id="getList" resultType="familyDto">
+		select num, name, phone
+		from family
+	</select>
+	<delete id="delete" parameterType="int">
+		delete from family
+		where num=#{num}
+	</delete>
+	<insert id="insert" parameterType="familyDto">
+		insert into family
+		(num, name, phone)
+		values(family_seq.nextval, #{name}, #{phone})
+	</insert>
+	<select id="getdata" parameterType="int"
+		resultType="familyDto">
+		select num,name,phone
+		from family
+		where num=#{num}
+	</select>
+	<update id="update"
+		parameterType="familyDto">
+		update family
+		set name=#{name}, phone=#{phone}
+		where num=#{num}
+	</update>
+</mapper>
