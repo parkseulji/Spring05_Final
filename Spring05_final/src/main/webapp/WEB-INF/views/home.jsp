@@ -6,9 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <title>/views/home.jsp</title>
+<jsp:include page="include/resource.jsp"/>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bootstrap.css" />
 </head>
 <body>
+<jsp:include page="include/navbar.jsp"/>
 <div class="container">
 <h1>인덱스 페이지 입니다</h1>
 	<ul>
