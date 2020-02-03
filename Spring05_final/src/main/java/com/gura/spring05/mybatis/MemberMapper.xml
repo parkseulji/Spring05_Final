@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="member"> <!-- mapper를 찾아가기위한 id -->
 	<!-- resultType : select 된 row를 어디에 담을 지 -->
-	<select id="getList" resultType="com.gura.spring05.member.dto.MemberDto">
+	<select id="getList" resultType="memberDto">
 		select num, name, addr
 		from member
 		order by num asc
@@ -13,21 +13,21 @@
 		where num=#{num} <!-- # = ? (바인딩)-> setint -->
 	</delete>
 	
-	<insert id="insert" parameterType="com.gura.spring05.member.dto.MemberDto">
+	<insert id="insert" parameterType="memberDto">
 		insert into member
 		(num, name, addr)
 		values(member_seq.nextval, #{name}, #{addr})
 	</insert>
 	
 	<select id="getdata" parameterType="int"
-		resultType="com.gura.spring05.member.dto.MemberDto">
+		resultType="memberDto">
 		select num,name,addr
 		from member
 		where num=#{num}
 	</select>
 	
 	<update id="update"
-		parameterType="com.gura.spring05.member.dto.MemberDto">
+		parameterType="memberDto">
 		update member
 		set name=#{name}, addr=#{addr}
 		where num=#{num}
