@@ -14,7 +14,7 @@
 		(num, name, phone)
 		values(family_seq.nextval, #{name}, #{phone})
 	</insert>
-	<select id="getdata" parameterType="int"
+	<select id="getData" parameterType="int"
 		resultType="familyDto">
 		select num,name,phone
 		from family
