@@ -37,4 +37,10 @@ public class UsersDaoImpl implements UsersDao{
 		//select 된 비밀번호를 리턴 해 준다.
 		return savedPwd;
 	}
+
+	@Override
+	public UsersDto getData(String id) {
+		
+		return session.selectOne("users.getData", id); //session : resultType / id : parameterType => mapper에서 사용
+	}
 }
