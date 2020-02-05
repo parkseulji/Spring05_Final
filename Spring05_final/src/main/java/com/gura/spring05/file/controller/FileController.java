@@ -48,7 +48,12 @@ public class FileController {
 		//다운로드 횟수 증가 시키도록
 		service.addDownCount(num);
 		//view page 정보를 ModelAndView 객체에 담기
-		mView.setViewName("file/download");
+		mView.setViewName("fileDownView"); // /view/fileDownView.jsp를 찾고 없으면 fileDownView bean 을 찾아간다.
 		return mView;
+	}
+	@RequestMapping("/file/delete")
+	public ModelAndView authDelete(HttpServletRequest request) {
+		service.removeFile(request);
+		return new ModelAndView("redirect:/file/list.do");
 	}
 }
