@@ -43,4 +43,24 @@ public class UsersDaoImpl implements UsersDao{
 		
 		return session.selectOne("users.getData", id); //session : resultType / id : parameterType => mapper에서 사용
 	}
+
+	@Override
+	public void updateProfile(UsersDto dto) {
+		session.update("users.updateProfile", dto);
+	}
+
+	@Override
+	public void updatePwd(UsersDto dto) {
+		session.update("users.updatePwd", dto);
+	}
+
+	@Override
+	public void updateUser(UsersDto dto) { //parameter type : UsersDto
+		session.update("users.updateUser", dto); //sql id : updateUser
+	}
+
+	@Override
+	public void delete(String id) {
+		session.delete("users.delete", id);
+	}
 }

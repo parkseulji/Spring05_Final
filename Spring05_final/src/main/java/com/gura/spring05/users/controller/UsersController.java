@@ -1,6 +1,7 @@
 package com.gura.spring05.users.controller;
 
 import java.net.URLEncoder;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;
@@ -11,10 +12,12 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.databind.type.MapType;
@@ -26,6 +29,7 @@ public class UsersController {
 	
 	@Autowired
 	private UsersService service;
+	private String newPwd;
 	
 	//회원가입 폼 요청 처리
 	@RequestMapping("/users/signup_form")
@@ -58,7 +62,7 @@ public class UsersController {
 		// "url" 이라는 파라미터가 넘어오는지 읽어와 본다.  
 		String url=request.getParameter("url");
 		if(url==null){//만일 없으면 
-			//로그인 성공후에 index.jsp 페이지로 보낼수 있도록 구성한다. 
+			//로그인 성공후에 index.jsp 페이지로 보낼 수 있도록 구성한다. 
 			url=request.getContextPath()+"/home.do";
 		}
 		//아이디, 비밀번호가 쿠키에 저장되었는지 확인해서 저장 되었으면 폼에 출력한다.
@@ -138,5 +142,84 @@ public class UsersController {
 		//view page 정보를 담고
 		mView.setViewName("users/info");
 		return mView; //ModelAndView 객체를 리턴 해 주기
+	}
+	
+	/*
+	 * [ 파일 업로드 설정 ]
+	 * 1. pom.xml 에 commons-fileupload, commons-io dependency 명시하기
+	 * 2. servlet-context.xml 에 CommonsMultipartResolver bean설정
+	 * 3. MultipartFile 객체 활용
+	 * 4. upload 폴더 만들기
+	 */
+	
+	//ajax파일 업로드 처리, JSON문자열을 리턴 해 주어야 한다.
+	@ResponseBody
+	@RequestMapping(value = "/users/profile_upload", method = RequestMethod.POST)
+	public Map<String, Object> profileUpload(HttpServletRequest request,
+			@RequestParam MultipartFile profileImage){
+		String path=service.saveProfileImage(request, profileImage);
+		
+		Map<String, Object> map=new HashMap<>();
+		map.put("savePath", path);
+		return map;
+	}
+	//비밀번호 수정하기 폼 요청 처리
+	@RequestMapping("/users/pwd_updateform")
+	public ModelAndView authPwdForm(HttpServletRequest request, ModelAndView mView) {
+		mView.setViewName("users/pwd_updateform");
+		return mView;
+	}
+	//비밀번호 수정 반영 요청 처리
+	@RequestMapping("/users/pwd_update")
+	public ModelAndView authPwdUpdate(HttpServletRequest request, ModelAndView mView) {
+		//기존 비밀번호
+		String pwd=request.getParameter("pwd");
+		//새 비밀번호
+		String newPwd=request.getParameter("newPwd");
+		//로그인 된 아이디
+		String id=(String)request.getSession().getAttribute("id");
+		//위의 3가지 정보를 UsersDto 객체에 담아서
+		UsersDto dto=new UsersDto();
+		dto.setPwd(pwd);
+		dto.setNewPwd(newPwd);
+		dto.setId(id);
+		//서비스에 전달
+		service.updatePassword(dto, mView);
+		
+		mView.setViewName("users/pwd_update");
+		return mView;
+	}
+	
+	//회원정보 수정폼 요청처리
+	@RequestMapping("/users/updateform")
+	public ModelAndView authUpdateform(HttpServletRequest request, ModelAndView mView) {
+		//세션 영역에서 로그인 된 id를 읽어와서
+		String id=(String)request.getSession().getAttribute("id");
+		//서비스 메소드를 호출해서 ModelAndView객체에 회원정보가 담기게 하고
+		service.showInfo(id, mView);
+		//view page설정한 다음
+		mView.setViewName("users/updateform");
+			return mView; //리턴 해 준다.
+	}
+	
+	public ModelAndView authUpdate(@ModelAttribute UsersDto dto, HttpServletRequest request) {
+		//서비스를 이용해서 수정 반영하고
+		service.updateUser(dto);
+		//개인정보 보기로 다시 리다이렉트 시킨다.		
+		return new ModelAndView("redirect:/users/info.do");
+	}
+	
+	@RequestMapping("/users/delete")
+	public ModelAndView authDelete(HttpServletRequest request, ModelAndView mView) {
+		HttpSession session=request.getSession();
+		String id=(String)session.getAttribute("id");
+		//서비스를 이용해서 해당 회원 정보 삭제
+		service.deleteUser(id);
+		//로그아웃 처리
+		session.invalidate();
+		
+		mView.addObject("id", id);
+		mView.setViewName("users/delete");
+		return mView;
 	}
 }

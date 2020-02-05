@@ -17,8 +17,27 @@
 		where id=#{inputId}
 	</select>
 	<select id="getData" parameterType="String" resultType="usersDto">
-		select id, email, regdate, profile
+		select id, pwd, email, regdate, profile
 		from users
 		where id=#{id}
 	</select>
+	<update id="updateProfile" parameterType="usersDto">
+		update users
+		set profile=#{profile}
+		where id=#{id}
+	</update>
+	<update id="updatePwd" parameterType="usersDto">
+		update users
+		set pwd=#{pwd}
+		where id=#{id}
+	</update>
+	<update id="updateUser" parameterType="usersDto">
+		update users
+		set email=#{email}
+		where id=#{id}
+	</update>
+	<delete id="delete" parameterType="String">
+		delete from users
+		where id=#{id}
+	</delete>
 </mapper>

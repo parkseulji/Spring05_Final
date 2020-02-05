@@ -4,13 +4,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>/member/update.jsp</title>
+<title>/users/update.jsp</title>
 </head>
 <body>
 <div class="container">
 	<h1>Alert</h1>
-	<p> <strong>${dto.num }</strong>번 회원의 정보를 수정했습니다.</p>
-	<a href="list.do">목록보기</a>
+	<p> <strong>${dto.id }</strong>님의 정보를 수정했습니다.</p>
+	<a href="home.do">목록보기</a>
 </div>
 </body>
 </html>
