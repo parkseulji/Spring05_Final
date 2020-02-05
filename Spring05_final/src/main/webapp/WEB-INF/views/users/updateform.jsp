@@ -18,8 +18,7 @@
 		</div>
 		<div class="form-group">
 			<label for="email">이메일</label>
-			<input class="form-control" type="text" name="email" id="email"
-				value="${dto.email }" />
+			<input class="form-control" type="text" id="email" name="email" value="${dto.email }" />
 		</div>
 		<button class="btn btn-primary" type="submit">수정확인</button>
 		<button class="btn btn-warning" type="reset">취소</button>
