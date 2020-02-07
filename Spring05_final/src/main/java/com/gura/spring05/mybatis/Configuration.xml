@@ -17,6 +17,6 @@
 		<mapper resource="com/gura/spring05/mybatis/UsersMapper.xml"/>
 		<mapper resource="com/gura/spring05/mybatis/FileMapper.xml"/>
 		<mapper resource="com/gura/spring05/mybatis/CafeMapper.xml"/>
-		<mapper resource="com/gura/spring05/mybatis/CageCommentMapper.xml"/>
+		<mapper resource="com/gura/spring05/mybatis/CafeCommentMapper.xml"/>
 	</mappers>
 </configuration>
