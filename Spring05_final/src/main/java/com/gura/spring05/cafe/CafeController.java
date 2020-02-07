@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gura.spring05.cafe.dto.CafeDto;
@@ -52,5 +53,34 @@ public class CafeController {
 		service.getDetail(request);
 		//view page로 forward 이동해서 글 자세히 보기
 		return "cafe/detail";
+	}
+	//원글 삭제 요청 처리
+	@RequestMapping("/cafe/delete")
+	public ModelAndView authDelete(HttpServletRequest request,
+			@RequestParam int num) {
+		//서비스를 이용해서 글을 삭제하기
+		service.deleteContent(num, request);
+		//글 목록 보기로 리다이렉트 이동
+		return new ModelAndView("redirect:/cafe/list.do");
+	}
+	@RequestMapping("/cafe/updateform")
+	public ModelAndView authUpdateform(HttpServletRequest request,
+			@RequestParam int num, ModelAndView mView) {
+		//서비스를 이용해서 수정 할 글정보를 ModelAndView 객체에 담고
+		service.getUpdateDate(mView, num);
+		//view page로 forward이동해서 수정폼 출력
+		mView.setViewName("cafe/updateform");
+		return mView;
+	}
+	
+	//원글 수정 반영 요청 처리
+	@RequestMapping(value = "/cafe/update", method = RequestMethod.POST)
+	public ModelAndView authUpdate(HttpServletRequest request,
+			@ModelAttribute CafeDto dto) {
+		//서비스를 이용해서 수정 반영한다.
+		service.updateContent(dto);
+		
+		//글 자세히보기로 리다이렉트 이동
+		return new ModelAndView("redirect:/cafe/detail.do?num="+dto.getNum());
 	}
 }
