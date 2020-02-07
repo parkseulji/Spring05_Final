@@ -14,7 +14,7 @@
 </jsp:include>
 <div class="container">
 	<ol class="breadcrumb">
-		<li><a href="${pageContext.request.contextPath }/cafe/list.jsp">목록</a></li>
+		<li><a href="${pageContext.request.contextPath }/cafe/list.do">목록</a></li>
 	</ol>
 	<c:if test="${not empty keyword }">
 		<p>
@@ -46,7 +46,7 @@
 				<td>${tmp.num }</td>
 				<td>${tmp.writer }</td>
 				<td>
-					<a href="detail.jsp?num=${tmp.num }">
+					<a href="detail.do?num=${tmp.num }">
 						${tmp.title }
 					</a>
 				</td>
@@ -57,14 +57,14 @@
 		</tbody>
 	</table>
 	
-	<a href="private/insertform.jsp">새글 작성</a>
+	<a href="private/insertform.do">새글 작성</a>
 	
 	<div class="page-display">
 		<ul class="pagination pagination-sm">
 			<c:choose>
 				<c:when test="${startPageNum ne 1 }">
 					<li>
-						<a href="list.애?pageNum=${startPageNum-1 }">&laquo;</a>
+						<a href="list.do?pageNum=${startPageNum-1 }">&laquo;</a>
 					</li>
 				</c:when>
 				<c:otherwise>
@@ -78,12 +78,12 @@
 				<c:choose>
 					<c:when test="${i eq pageNum }">
 						<li class="active">
-							<a href="list.애?pageNum=${i }">${i }</a>
+							<a href="list.do?pageNum=${i }">${i }</a>
 						</li>
 					</c:when>
 					<c:otherwise>
 						<li>
-							<a href="list.애?pageNum=${i }">${i }</a>
+							<a href="list.do?pageNum=${i }">${i }</a>
 						</li>
 					</c:otherwise>
 				</c:choose>

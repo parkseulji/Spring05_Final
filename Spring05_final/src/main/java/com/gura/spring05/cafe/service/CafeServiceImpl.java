@@ -108,5 +108,10 @@ public class CafeServiceImpl implements CafeService{
 		request.setAttribute("totalPageCount", totalPageCount);	
 		//전체 글의 갯수도 request 에 담는다.
 		request.setAttribute("totalRow", totalRow);	
+	}
+
+	@Override
+	public void saveContent(CafeDto dto) {
+		cafeDao.insert(dto);
 	}	
 }
