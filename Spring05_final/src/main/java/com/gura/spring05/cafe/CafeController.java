@@ -46,4 +46,11 @@ public class CafeController {
 		//글 목록 보기로 리다이렉트 이동
 		return new ModelAndView("redirect:/cafe/list.do");
 	}
+	//글 자세히 보기 요청 처리
+	@RequestMapping("/cafe/detail")
+	public String detail(HttpServletRequest request) {
+		service.getDetail(request);
+		//view page로 forward 이동해서 글 자세히 보기
+		return "cafe/detail";
+	}
 }

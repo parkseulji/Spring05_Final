@@ -9,10 +9,12 @@ public class CafeDto {
 	private String regdate;
 	private int startRowNum;
 	private int endRowNum;
+	private int prevNum; //이전글의 글 번호를 담을 필드
+	private int naxtNum; //다음글의 글 번호를 담을 필드
 	//디폴트 생성자
 	public CafeDto() {}
 	public CafeDto(int num, String writer, String title, String content, int viewCount, String regdate, int startRowNum,
-			int endRowNum) {
+			int endRowNum, int prevNum, int naxtNum) {
 		super();
 		this.num = num;
 		this.writer = writer;
@@ -22,6 +24,8 @@ public class CafeDto {
 		this.regdate = regdate;
 		this.startRowNum = startRowNum;
 		this.endRowNum = endRowNum;
+		this.prevNum = prevNum;
+		this.naxtNum = naxtNum;
 	}
 	public int getNum() {
 		return num;
@@ -70,6 +74,18 @@ public class CafeDto {
 	}
 	public void setEndRowNum(int endRowNum) {
 		this.endRowNum = endRowNum;
+	}
+	public int getPrevNum() {
+		return prevNum;
+	}
+	public void setPrevNum(int prevNum) {
+		this.prevNum = prevNum;
+	}
+	public int getNaxtNum() {
+		return naxtNum;
+	}
+	public void setNaxtNum(int naxtNum) {
+		this.naxtNum = naxtNum;
 	}
 	
 }
