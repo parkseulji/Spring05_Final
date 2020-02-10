@@ -82,11 +82,13 @@
 	<h3>카페 글 상세 보기</h3>
 
 	<c:if test="${dto.prevNum ne 0 }">
-		<a href="detail.do?num=${dto.prevNum }&condition=${condition}&keyword=${encodedKeyword}">이전글</a>
+		<a href="detail.do?num=${dto.prevNum }
+			&condition=${condition}&keyword=${encodedKeyword}">이전글</a>
 	</c:if>
 
 	<c:if test="${dto.nextNum ne 0 }">
-		<a href="detail.do?num=${dto.nextNum }&condition=${condition}&keyword=${encodedKeyword}">다음글</a>
+		<a href="detail.do?num=${dto.nextNum }
+			&condition=${condition}&keyword=${encodedKeyword}">다음글</a>
 	</c:if>	
 	<table class="table table-bordered table-condensed">
 		<colgroup>
@@ -209,7 +211,10 @@
 <script>
 	//댓글 수정 링크를 눌렀을때 호출되는 함수 등록
 	$(".comment-update-link").click(function(){
-		$(this).parent().parent().parent().find(".comment-update-form").slideToggle(200);
+		$(this)
+		.parent().parent().parent()
+		.find(".comment-update-form")
+		.slideToggle(200);
 	});
 
 	//댓글 수정 폼에 submit 이벤트가 일어났을때 호출되는 함수 등록
@@ -241,29 +246,38 @@
 	function deleteComment(num){
 		var isDelete=confirm("확인을 누르면 댓글이 삭제 됩니다.");
 			if(isDelete){
-			$.ajax({url:"comment_delete.do",method:"post",data:{"num":num},success:function(responseData){
-					if(responseData.isSuccess){
-						var sel="#comment"+num;
-						$(sel).text("삭제된 댓글 입니다.");
+				//페이지 전환 없이 ajax 요청을 통해서 삭제하기
+				$.ajax({
+					url:"comment_delete.do", // ""/cafe/comment_delete.do 요청
+					method:"post",
+					data:{"num":num}, // num이라는 파라미터명으로 삭제 할 댓글의 번호 전송
+					success:function(responseData){
+						if(responseData.isSuccess){
+							var sel="#comment"+num;
+							$(sel).text("삭제된 댓글 입니다.");
+						}
 					}
-				}
-			});
+				});
 			}
 	}
 
-	//폼에 submit 이벤트가 일어 났을때 실행할 함수 등록 
+	//폼에 submit 이벤트가 일어 났을때 실행 할 함수 등록 
 	$(".comments form").on("submit", function(){
 		//로그인 여부
 		var isLogin=${not empty id};
 		if(isLogin==false){
 			alert("로그인 페이지로 이동 합니다.");
-			location.href="${pageContext.request.contextPath}/users/loginform.do?url=${pageContext.request.contextPath}/cafe/detail.do?num=${dto.num}";
+			location.href=
+				"${pageContext.request.contextPath}/users/loginform.do?url=${pageContext.request.contextPath}/cafe/detail.do?num=${dto.num}";
 			return false;//폼 전송 막기 
 		}
 	});
 
-	//답글 달기 링크를 클릭했을때 실행할 함수 등록
-	$(".comment .reply_link").click(function(){$(this).parent().parent().parent().find(".comment-insert-form").slideToggle(200);
+	//답글 달기 링크를 클릭했을때 실행 할 함수 등록
+	$(".comment .reply_link").click(function(){$(this)
+		.parent().parent().parent()
+		.find(".comment-insert-form")
+		.slideToggle(200); //slideToggle(2초) : 접혀있다 펼쳐지는
 	
 		// 답글 <=> 취소가 서로 토글 되도록 한다. 
 		if($(this).text()=="답글"){

@@ -228,5 +228,10 @@ public class CafeServiceImpl implements CafeService{
 		//댓글 정보를 DB 에 저장한다.
 		cafeCommentDao.insert(dto);
 	}
+
+	@Override
+	public void deleteComment(int num) {
+		cafeCommentDao.delete(num);
+	}
 	
 }
