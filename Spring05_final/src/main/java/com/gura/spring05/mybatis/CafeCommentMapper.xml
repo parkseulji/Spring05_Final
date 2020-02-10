@@ -8,7 +8,7 @@
 		INNER JOIN users
 		ON board_cafe_comment.writer = users.id
 		WHERE ref_group=#{ref_group}
-		ORDER BY comment_group ASC, num ASC
+		ORDER BY comment_group ASC, num ASC <!-- 원글과 댓글들의 번호가 같을 때 차례로 정렬돼서 모여있게 해 준다. -->
 	</select>
 	<update id="delete" parameterType="int">
 		update board_cafe_comment

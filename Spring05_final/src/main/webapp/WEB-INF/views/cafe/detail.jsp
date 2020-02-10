@@ -217,7 +217,7 @@
 		.slideToggle(200);
 	});
 
-	//댓글 수정 폼에 submit 이벤트가 일어났을때 호출되는 함수 등록
+	//댓글 수정 폼에 submit 이벤트가 일어났을때 호출되는 함수 등록 (submit:폼 제출)
 	$(".comment-update-form").on("submit", function(){
 		// "comment_update.do"
 		var url=$(this).attr("action");
@@ -240,8 +240,8 @@
 				}
 			}
 		});
-	//폼 제출 막기 
-	return false;
+	//폼 제출 막기 (기본동작을 막아준다-제출x)
+	return false; //페이지 전환을 하지 않기 위해
 });
 
 	//댓글 삭제를 눌렀을때 호출되는 함수
@@ -250,7 +250,7 @@
 			if(isDelete){
 				//페이지 전환 없이 ajax 요청을 통해서 삭제하기
 				$.ajax({
-					url:"comment_delete.do", // ""/cafe/comment_delete.do 요청
+					url:"comment_delete.do", // "/cafe/comment_delete.do" 요청
 					method:"post",
 					data:{"num":num}, // num이라는 파라미터명으로 삭제 할 댓글의 번호 전송
 					success:function(responseData){
@@ -270,7 +270,7 @@
 		if(isLogin==false){
 			alert("로그인 페이지로 이동 합니다.");
 			location.href="${pageContext.request.contextPath}/users/loginform.do?url=${pageContext.request.contextPath}/cafe/detail.do?num=${dto.num}";
-			return false;//폼 전송 막기 
+			return false;//폼 전송 막기 //이동하기 전에 폼이 제출되는 것을 막기위해
 		}
 	});
 	//폼에 click 이벤트가 일어 났을때 실행 할 함수 등록 
