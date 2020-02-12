@@ -15,6 +15,7 @@
 <h1>인덱스 페이지 입니다</h1>
 	<ul>
 		<li><a href="member/list.do">회원목록 보기(member 테이블)</a></li>
+		<li><a href="angular/test01.html">angularjs Test</a></li>
 	</ul>
 <h2>공지사항</h2>
 <ul>

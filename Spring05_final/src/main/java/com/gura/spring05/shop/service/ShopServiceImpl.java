@@ -1,6 +1,7 @@
 package com.gura.spring05.shop.service;
 
 import java.util.List;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.gura.spring05.exception.NoDeliveryException;
 import com.gura.spring05.shop.dao.OrderDao;
 import com.gura.spring05.shop.dao.ShopDao;
 import com.gura.spring05.shop.dto.OrderDto;
@@ -62,5 +64,4 @@ public class ShopServiceImpl implements ShopService{
 		dto2.setAddr("강남역 스벅");
 		orderDao.addOrder(dto2);
 	}
-
 }
